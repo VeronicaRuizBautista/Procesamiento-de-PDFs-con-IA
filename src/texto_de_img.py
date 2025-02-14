@@ -1,9 +1,9 @@
 import pytesseract
-from pdf2image import conver_from_path
+from pdf2image import convert_from_path
 from PIL import Image
 
 def texto_de_img(pdf):
-    images = conver_from_path(pdf, 300)
+    images = convert_from_path(pdf, 300)
     texto_completo = ''
     for i, page in enumerate(images):
         text = pytesseract.image_to_string(page)
