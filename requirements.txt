@@ -2,3 +2,4 @@ pdfplumber
 pdfminer.six
 pytesseract
 pillow
+pdf2image

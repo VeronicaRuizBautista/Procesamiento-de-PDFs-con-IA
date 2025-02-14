@@ -1,6 +1,6 @@
 import pdfplumber
 
-def extraer_texto_y_tablas(pdf):
+def texto_y_tablas(pdf):
     with pdfplumber.open(pdf) as pdf:
         for page in pdf.pages:
             text = page.extract_text()
