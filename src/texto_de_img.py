@@ -1,0 +1,1 @@
+texto_completo += f"\n--- Página {i+1} ---\n{text}"
