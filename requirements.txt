@@ -3,3 +3,4 @@ pdfminer.six
 pytesseract
 pillow
 pdf2image
+nltk
