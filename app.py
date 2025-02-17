@@ -1,10 +1,13 @@
 import streamlit as st 
 import os
-from src.texto import texto 
-from src.texto_y_tablas import texto_y_tablas
-from src.texto_de_img import texto_de_img
+from procesamientoPDFs.texto import texto 
+from procesamientoPDFs.texto_y_tablas import texto_y_tablas
+from procesamientoPDFs.texto_de_img import texto_de_img
+from src.normalizar import normalizar
+from src.vectorizar import vectorizar
+import pandas as pd
 
-st.title("📄 Procesador de PDF")
+st.title("📄 Procesamiento de PDFs y Análisis de Texto")
 
 opcion = st.radio("Selecciona una opción", [
     "Extraer texto de PDF",
@@ -20,6 +23,8 @@ carpeta = "pdfTemporal"
 #Crear la carpeta si no existe
 if not os.path.exists(carpeta):
     os.makedirs(carpeta)
+
+texto_del_pdf = ""
 
 if pdf is not None:
     st.success("✅ Archivo cargado correctamente")
@@ -41,6 +46,15 @@ if pdf is not None:
     elif opcion == "Extraer texto de PDF escaneado":
         texto_del_pdf = texto_de_img(pdf_path)
         st.text_area("📜 Texto extraído:", texto_del_pdf, height=300)
-        
+    
+    if st.button("🔍 Normalizar y vectorizar texto"):
+        texto_normalizado = normalizar(texto_del_pdf)
+        texto_vectorizado, palabras = vectorizar([texto_normalizado])
+        # Crear un DataFrame con las palabras como columnas
+        df = pd.DataFrame(texto_vectorizado, columns=palabras)
+        st.markdown("✨ Texto vectorizado:")
+        st.dataframe(df)
+        st.text_area("🔤 Palabras clave:", ", ".join(palabras), height=150)
+
     #Eliminar PDF temporal
     os.remove(pdf_path)

@@ -4,3 +4,5 @@ pytesseract
 pillow
 pdf2image
 nltk
+scikit-learn
+pandas
