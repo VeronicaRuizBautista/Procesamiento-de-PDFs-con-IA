@@ -6,3 +6,4 @@ pdf2image
 nltk
 scikit-learn
 pandas
+gensim
