@@ -1,4 +1,4 @@
-# Procesamiento, normalización y vectorización de PDFs 📜
+# Procesamiento, normalización, vectorización y clasificación de PDFs 📜
 
 Este proyecto permite extraer, normalizar y vectorizar información de archivos PDF, incluyendo texto y tablas, tanto de documentos digitales como de PDFs escaneados. Además, ofrece una interfaz interactiva con Streamlit, permitiendo a los usuarios cargar archivos y seleccionar entre distintas opciones de extracción y clasificación de texto.
 
