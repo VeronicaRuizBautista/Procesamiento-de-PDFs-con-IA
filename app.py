@@ -49,6 +49,7 @@ if pdf is not None:
         st.text_area("📜 Texto extraído:", texto_del_pdf, height=300)
     
     if st.button("🔍 Normalizar y vectorizar texto"):
+        st.success("✅ Texto normalizado y vectorizado")
         texto_normalizado = normalizar(texto_del_pdf)
         texto_vectorizado, palabras = vectorizar(texto_normalizado)
         st.session_state.texto_vectorizado = texto_vectorizado
@@ -59,10 +60,10 @@ if pdf is not None:
         st.dataframe(df)
         st.text_area("🔤 Palabras clave:", ", ".join(palabras), height=150)
 
-    if st.button ("Aplicar modelo de clasificación de texto"):
+    if st.button ("📇 Aplicar clasificación de texto"):
         if "texto_vectorizado" in st.session_state:
             precision = clasificar(st.session_state.texto_vectorizado, st.session_state.textos)
-            st.text_area("Precisión:", precision, height=50)
+            st.text_area("Precisión:", precision, height=100)
         else:
             st.warning("⚠️ Primero debes normalizar y vectorizar el texto.")
     #Eliminar PDF temporal
