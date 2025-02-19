@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-pdf-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-pdf
+  template:
+    metadata:
+      labels:
+        app: api-pdf
+    spec:
+      containers:
+      - name: api-pdf
+        image: veronicaruizbautista/mi-api-pdf:latest
+        ports:
+        - containerPort: 8501

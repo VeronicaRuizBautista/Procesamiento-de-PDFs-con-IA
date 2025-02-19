@@ -6,4 +6,5 @@ pdf2image
 nltk
 scikit-learn
 pandas
+streamlit
 gensim
