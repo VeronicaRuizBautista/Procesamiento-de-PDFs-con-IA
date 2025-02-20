@@ -9,4 +9,5 @@ spec:
     - protocol: TCP
       port: 8501         # Puerto que será accesible externamente
       targetPort: 8501
+      nodePort: 31117    
   type: NodePort        
