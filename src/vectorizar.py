@@ -1,12 +1,20 @@
-from sklearn.feature_extraction.text import CountVectorizer
-
-vectorizer = CountVectorizer()
+import gensim
+from gensim.models import Word2Vec
+import numpy as np
 
 def vectorizar(textos):
-    if isinstance(textos, str):
-        textos = [textos]  # Convertir a lista si es una sola cadena
-    
-    vector = vectorizer.fit_transform(textos)
-    palabras = vectorizer.get_feature_names_out()
-    
-    return vector.toarray(), palabras
+    model = Word2Vec(sentences = textos, min_count=1, window=5, workers=4)
+    palabras = list(model.wv.index_to_key)
+    print("palabras", palabras, "len", len(palabras))
+    texto_vectorizado = np.array([model.wv[palabra] for palabra in palabras])
+    vector = np.mean([model.wv[palabra] for palabra in palabras], axis=0)
+    print("texto_vectorizado", texto_vectorizado, "vector", vector)
+    return texto_vectorizado, palabras, vector
+
+from sentence_transformers import SentenceTransformer
+
+modelo = SentenceTransformer("all-MiniLM-L6-v2")
+
+def vectorizar_parrafo(textos):
+    texto_vectorizado = modelo.encode(textos)
+    return texto_vectorizado

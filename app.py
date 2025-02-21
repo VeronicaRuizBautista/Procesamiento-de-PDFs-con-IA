@@ -4,7 +4,7 @@ from procesamientoPDFs.texto import texto
 from procesamientoPDFs.texto_y_tablas import texto_y_tablas
 from procesamientoPDFs.texto_de_img import texto_de_img
 from src.normalizar import normalizar
-from src.vectorizar import vectorizar
+from src.vectorizar import vectorizar, vectorizar_parrafo
 import pandas as pd
 from src.clasificacion import clasificar
 
@@ -51,18 +51,19 @@ if pdf is not None:
     if st.button("🔍 Normalizar y vectorizar texto"):
         st.success("✅ Texto normalizado y vectorizado")
         texto_normalizado = normalizar(texto_del_pdf)
-        texto_vectorizado, palabras = vectorizar(texto_normalizado)
-        st.session_state.texto_vectorizado = texto_vectorizado
+        texto_vectorizado, palabras, vector = vectorizar(texto_normalizado)
+        parrafo_vectorizado = vectorizar_parrafo(texto_normalizado)
+        st.session_state.parrafo_vectorizado = parrafo_vectorizado
         st.session_state.textos = texto_normalizado
         # Crear un DataFrame con las palabras como columnas
-        df = pd.DataFrame(texto_vectorizado, columns=palabras)
+        df = pd.DataFrame(texto_vectorizado, index=palabras)
         st.markdown("✨ Texto vectorizado:")
         st.dataframe(df)
         st.text_area("🔤 Palabras clave:", ", ".join(palabras), height=150)
 
     if st.button ("📇 Aplicar clasificación de texto"):
-        if "texto_vectorizado" in st.session_state:
-            precision = clasificar(st.session_state.texto_vectorizado, st.session_state.textos)
+        if "parrafo_vectorizado" in st.session_state:
+            precision = clasificar(st.session_state.parrafo_vectorizado, st.session_state.textos)
             st.text_area("Precisión:", precision, height=100)
         else:
             st.warning("⚠️ Primero debes normalizar y vectorizar el texto.")

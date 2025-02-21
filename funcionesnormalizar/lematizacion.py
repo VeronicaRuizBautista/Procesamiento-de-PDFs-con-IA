@@ -8,4 +8,4 @@ lemmatizer = WordNetLemmatizer()
 
 def lematizar(tokens):
     lemas = [lemmatizer.lemmatize(token) for token in tokens]
-    return " ".join(lemas)
+    return lemas
