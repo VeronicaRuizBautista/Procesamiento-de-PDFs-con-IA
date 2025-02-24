@@ -7,6 +7,7 @@ from src.normalizar import normalizar
 from src.vectorizar import vectorizar, vectorizar_parrafo
 import pandas as pd
 from src.clasificacion import clasificar
+from db.dbQdrant import add_embeddings_to_bd
 
 st.title("📄 Procesamiento de PDFs y Análisis de Texto")
 
@@ -67,5 +68,14 @@ if pdf is not None:
             st.text_area("Precisión:", precision, height=100)
         else:
             st.warning("⚠️ Primero debes normalizar y vectorizar el texto.")
+    
+    if st.button("📥 Guardar data en bd"):
+        if "parrafo_vectorizado" in st.session_state:
+            qdrant = add_embeddings_to_bd(st.session_state.parrafo_vectorizado, st.session_state.textos, "InfoPDFs")
+            st.text_area("✨ Data guardada en bd", qdrant, height=100)  
+        else:
+            st.warning("⚠️ Primero debes normalizar y vectorizar el texto.")
+    
+    
     #Eliminar PDF temporal
     os.remove(pdf_path)

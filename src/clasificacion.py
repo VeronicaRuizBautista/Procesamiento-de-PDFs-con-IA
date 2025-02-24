@@ -19,6 +19,7 @@ def clasificar(vector, textos):
     # Mostrar cómo clasificó cada frase
     classification_results = []
     for texto, prediccion in zip(textos_test, y_pred):
+        texto = " ".join(texto)
         classification_results.append(f"Frase: {texto}\nClase predicha: {prediccion}\n---")
         
     st.text_area("Resultados de clasificación:", "\n".join(classification_results), height=300)
