@@ -22,6 +22,5 @@ def clasificar(vector, textos):
         texto = " ".join(texto)
         classification_results.append(f"Frase: {texto}\nClase predicha: {prediccion}\n---")
         
-    st.text_area("Resultados de clasificación:", "\n".join(classification_results), height=300)
-    return accuracy_score(labels_test, y_pred)
+    return accuracy_score(labels_test, y_pred), classification_results
     

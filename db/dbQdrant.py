@@ -1,6 +1,5 @@
 from qdrant_client import QdrantClient
 from langchain.vectorstores import Qdrant
-from langchain.embeddings import OpenAIEmbeddings
 from qdrant_client.models import PointStruct
 
 qdrant = QdrantClient(
@@ -66,3 +65,11 @@ def obtener_embeddings(collection_name):
         scroll_response = qdrant.scroll(collection_name=collection_name, scroll_token=scroll_token)
 
     return embeddings
+
+def busqueda_similares(query, collection_name, top=5):
+    respuesta = qdrant.search(
+        collection_name=collection_name,
+        query_vector=query,
+        limit=top
+    )
+    return respuesta

@@ -8,3 +8,13 @@ scikit-learn
 pandas
 streamlit
 gensim
+uuid
+python-dotenv
+transformers 
+torch
+accelerate
+punkt_tab
+langchain
+qdrant_client
+wordnet
+numpy
